@@ -15,17 +15,35 @@ export default class Dashboard extends React.Component {
   }
   componentDidMount() {
     const here = this;
-    this.serverData = axios.get('/serverInfo')
+    const CancelToken = axios.CancelToken;
+    this.source = CancelToken.source();
+
+    this.serverData = axios.get('/serverInfo', { cancelToken: this.source.token })
                               .then((result) => {
                                 here.setState({
                                   nodeVersion: result.data.node,
                                   appPath: result.data.path,
                                   dateTime: result.data.date
                                 });
+                              })
+                              .catch((error) => {
+                                if (axios.isCancel(error)) {
+                                  console.log('Request canceled', error.message);
+                                } else if (error.response) {
+                                  // The server responded with a status code outside 2xx
+                                  console.log('An error occurred getting the server info:');
+                                  console.log(error.response.data);
+                                  console.log(error.response.status);
+                                  console.log(error.response.headers);
+                                } else {
+                                  // Error occurred setting up the request
+                                  console.log(`An error occurred getting the server info: ${error.message}`);
+                                }
+                                alert('An error occurred getting the server info');
                               });
   }
   componentWillUnmount() {
-    this.serverData.abort();
+    this.source.cancel('Operation canceled by the user action.');
   }
   render() {
     return (
