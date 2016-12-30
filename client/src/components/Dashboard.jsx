@@ -10,7 +10,10 @@ export default class Dashboard extends React.Component {
       nodeVersion: '',
       appPath: '',
       dateTime: '',
-      username: ''
+      user: {
+        username: '',
+        password: ''
+      }
     };
   }
   componentDidMount() {
@@ -53,7 +56,7 @@ export default class Dashboard extends React.Component {
           <p>Node.js version: {this.state.nodeVersion}</p>
           <p>Path: {this.state.appPath}</p>
           <p>Date and Time: {this.state.dateTime}</p>
-          <p>User: {this.state.username}</p>
+          <p>User: {this.state.user.username}</p>
         </div>
       </div>
     )
