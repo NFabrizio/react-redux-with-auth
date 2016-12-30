@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 const LoginForm = ({
   onSubmit,
   onChange,
+  errors,
   user
 }) => (
   <div className="login row">

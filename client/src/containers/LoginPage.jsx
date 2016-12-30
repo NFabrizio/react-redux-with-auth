@@ -29,6 +29,50 @@ export default class LoginPage extends React.Component {
   loginSubmit(event) {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
+    const here = this;
+
+
+    const username = encodeURIComponent(this.state.user.username);
+    const password = encodeURIComponent(this.state.user.password);
+    const formData = `username=${username}&password=${password}`;
+
+    // create an AJAX request
+    const request = new XMLHttpRequest();
+    request.open('post', '/auth/login');
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.responseType = 'json';
+    request.addEventListener('load', () => {
+      if (request.status === 200) {
+        // success
+
+        // change the component-container state
+        this.setState({
+          errors: {}
+        });
+
+        console.log('The form is valid');
+      } else {
+        // failure
+
+        // change the component state
+        const errors = request.response.errors ? request.response.errors : {};
+        errors.summary = request.response.message;
+
+        // Error occurred setting up the request
+        console.log(`An error occurred getting the server info: ${errors.summary} \n` +
+          `${errors.username ? '- ' + errors.username : ''} \n` +
+          `${errors.password ? '- ' + errors.password : ''} `);
+
+        alert(`${errors.summary} \n` +
+          `${errors.username ? '- ' + errors.username : ''} \n` +
+          `${errors.password ? '- ' + errors.password : ''}`);
+
+        this.setState({
+          errors
+        });
+      }
+    });
+    request.send(formData);
 
     console.log('username:', this.state.user.username);
     console.log('password:', this.state.user.password);
@@ -57,6 +101,7 @@ export default class LoginPage extends React.Component {
       <LoginForm
         onSubmit={this.loginSubmit}
         onChange={this.changeUser}
+        errors={this.state.errors}
         user={this.state.user}
       />
     );

@@ -26717,8 +26717,49 @@
 	  _createClass(LoginPage, [{
 	    key: 'loginSubmit',
 	    value: function loginSubmit(event) {
+	      var _this2 = this;
+
 	      // prevent default action. in this case, action is the form submission event
 	      event.preventDefault();
+	      var here = this;
+
+	      var username = encodeURIComponent(this.state.user.username);
+	      var password = encodeURIComponent(this.state.user.password);
+	      var formData = 'username=' + username + '&password=' + password;
+
+	      // create an AJAX request
+	      var request = new XMLHttpRequest();
+	      request.open('post', '/auth/login');
+	      request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	      request.responseType = 'json';
+	      request.addEventListener('load', function () {
+	        if (request.status === 200) {
+	          // success
+
+	          // change the component-container state
+	          _this2.setState({
+	            errors: {}
+	          });
+
+	          console.log('The form is valid');
+	        } else {
+	          // failure
+
+	          // change the component state
+	          var errors = request.response.errors ? request.response.errors : {};
+	          errors.summary = request.response.message;
+
+	          // Error occurred setting up the request
+	          console.log('An error occurred getting the server info: ' + errors.summary + ' \n' + ((errors.username ? '- ' + errors.username : '') + ' \n') + ((errors.password ? '- ' + errors.password : '') + ' '));
+
+	          alert(errors.summary + ' \n' + ((errors.username ? '- ' + errors.username : '') + ' \n') + ('' + (errors.password ? '- ' + errors.password : '')));
+
+	          _this2.setState({
+	            errors: errors
+	          });
+	        }
+	      });
+	      request.send(formData);
 
 	      console.log('username:', this.state.user.username);
 	      console.log('password:', this.state.user.password);
@@ -26752,6 +26793,7 @@
 	      return _react2.default.createElement(_LoginForm2.default, {
 	        onSubmit: this.loginSubmit,
 	        onChange: this.changeUser,
+	        errors: this.state.errors,
 	        user: this.state.user
 	      });
 	    }
@@ -26783,6 +26825,7 @@
 	var LoginForm = function LoginForm(_ref) {
 	  var onSubmit = _ref.onSubmit,
 	      onChange = _ref.onChange,
+	      errors = _ref.errors,
 	      user = _ref.user;
 	  return _react2.default.createElement(
 	    'div',
