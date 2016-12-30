@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 import LoginForm from '../components/LoginForm.jsx';
 
-
-class LoginPage extends React.Component {
-
+export default class LoginPage extends React.Component {
   /**
    * Class constructor.
    */
@@ -14,12 +12,12 @@ class LoginPage extends React.Component {
     this.state = {
       errors: {},
       user: {
-        email: '',
+        username: '',
         password: ''
       }
     };
 
-    this.processForm = this.processForm.bind(this);
+    this.loginSubmit = this.loginSubmit.bind(this);
     this.changeUser = this.changeUser.bind(this);
   }
 
@@ -28,11 +26,11 @@ class LoginPage extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  processForm(event) {
+  loginSubmit(event) {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
 
-    console.log('email:', this.state.user.email);
+    console.log('username:', this.state.user.username);
     console.log('password:', this.state.user.password);
   }
 
@@ -57,14 +55,10 @@ class LoginPage extends React.Component {
   render() {
     return (
       <LoginForm
-        onSubmit={this.processForm}
+        onSubmit={this.loginSubmit}
         onChange={this.changeUser}
-        errors={this.state.errors}
         user={this.state.user}
       />
     );
   }
-
 }
-
-export default LoginPage;

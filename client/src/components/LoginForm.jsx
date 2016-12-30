@@ -1,55 +1,55 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-
 
 const LoginForm = ({
   onSubmit,
   onChange,
-  errors,
   user
 }) => (
-  <Card className="container">
-    <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">Login</h2>
-
-      {errors.summary && <p className="error-message">{errors.summary}</p>}
-
-      <div className="field-line">
-        <TextField
-          floatingLabelText="Email"
-          name="email"
-          errorText={errors.email}
-          onChange={onChange}
-          value={user.email}
-        />
-      </div>
-
-      <div className="field-line">
-        <TextField
-          floatingLabelText="Password"
-          type="password"
-          name="password"
-          onChange={onChange}
-          errorText={errors.password}
-          value={user.password}
-        />
-      </div>
-
-      <div className="button-line">
-        <RaisedButton type="submit" label="Log in" primary />
-      </div>
-
-    </form>
-  </Card>
+  <div className="login row">
+    <div className="login-form col-md-6 col-md-offset-3">
+      <h4>Login</h4>
+      <p>Welcome to the simple Node React Redux App</p>
+      <form className="login-form form-horizontal" id="loginForm" onSubmit={onSubmit}>
+        <fieldset>
+          <div className="col-md-12 form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="dfm-mag-username"
+              placeholder="username"
+              name="username"
+              autoFocus
+              required
+              onChange={onChange}
+            />
+          </div>
+          <div className=" col-md-12 form-group">
+            <input
+              type="password"
+              className="form-control"
+              id="dfm-mag-password"
+              placeholder="password"
+              name="password"
+              required
+              onChange={onChange}
+            />
+          </div>
+          <input
+            type="submit"
+            className="btn btn-login"
+            id="login-button"
+            value="Sign in"
+          />
+        </fieldset>
+      </form>
+    </div>
+  </div>
 );
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 };
 
