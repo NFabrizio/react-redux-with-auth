@@ -11,6 +11,15 @@ const port = 3000;
 app.use(express.static('./server/static/'));
 app.use(express.static('./client/dist/'));
 
+// Create endpoint for server data to display to logged in user
+app.get('/serverInfo', (req, res) => {
+  res.send({
+    node: process.version,
+    path: path.dirname(require.main.filename),
+    date: new Date()
+  });
+});
+
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 app.get('*', (req, res) => {
