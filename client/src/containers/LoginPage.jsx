@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.jsx';
 
 export default class LoginPage extends React.Component {
@@ -8,9 +9,18 @@ export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
+    const storedMessage = localStorage.getItem('successMessage');
+    let successMessage = '';
+
+    if (storedMessage) {
+      successMessage = storedMessage;
+      localStorage.removeItem('successMessage');
+    }
+
     // set the initial component state
     this.state = {
       errors: {},
+      successMessage,
       user: {
         username: '',
         password: ''
@@ -42,6 +52,7 @@ export default class LoginPage extends React.Component {
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.responseType = 'json';
     request.addEventListener('load', () => {
+
       if (request.status === 200) {
         // success
 
@@ -50,7 +61,11 @@ export default class LoginPage extends React.Component {
           errors: {}
         });
 
-        console.log('The form is valid');
+        Auth.authenticateUser(request.response.token);
+
+        this.context.router.replace('/');
+
+        // console.log('The form is valid');
       } else {
         // failure
 
@@ -62,10 +77,6 @@ export default class LoginPage extends React.Component {
         console.log(`An error occurred getting the server info: ${errors.summary} \n` +
           `${errors.username ? '- ' + errors.username : ''} \n` +
           `${errors.password ? '- ' + errors.password : ''} `);
-
-        alert(`${errors.summary} \n` +
-          `${errors.username ? '- ' + errors.username : ''} \n` +
-          `${errors.password ? '- ' + errors.password : ''}`);
 
         this.setState({
           errors
@@ -102,8 +113,13 @@ export default class LoginPage extends React.Component {
         onSubmit={this.loginSubmit}
         onChange={this.changeUser}
         errors={this.state.errors}
+        successMessage={this.state.successMessage}
         user={this.state.user}
       />
     );
   }
 }
+
+LoginPage.contextTypes = {
+  router: PropTypes.object.isRequired
+};

@@ -5,6 +5,7 @@ const LoginForm = ({
   onSubmit,
   onChange,
   errors,
+  successMessage,
   user
 }) => (
   <div className="login row">
@@ -12,6 +13,8 @@ const LoginForm = ({
       <h4>Login</h4>
       <p>Welcome to the simple Node React Redux App</p>
       <form className="login-form form-horizontal" id="loginForm" onSubmit={onSubmit}>
+        {successMessage && <p className="success-message">{successMessage}</p>}
+        {errors.summary && <p className="error-message">{errors.summary}</p>}
         <fieldset>
           <div className="col-md-12 form-group">
             <input
@@ -51,6 +54,8 @@ const LoginForm = ({
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  successMessage: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired
 };
 

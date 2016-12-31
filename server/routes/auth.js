@@ -1,6 +1,9 @@
 const express = require('express');
+const passport = require('passport');
+const config = require('../../config');
 
 const router = new express.Router();
+const user = config.users[0];
 
 /**
  * Validate the login form
@@ -10,23 +13,22 @@ const router = new express.Router();
  *                   errors tips, and a global message for the whole form.
  */
 function checkCredentials(input) {
-console.log(input);
   const errors = {};
   let isInputValid = true;
   let message = '';
 
-  if (!input || !input.username || input.username.trim() !== 'demo') {
+  if (!input || !input.username || input.username.trim() !== user.username) {
     isInputValid = false;
     errors.username = 'Incorrect username.';
   }
 
-  if (!input || !input.password || input.password.trim() !== 'password1') {
+  if (!input || !input.password || input.password.trim() !== user.password) {
     isInputValid = false;
     errors.password = 'Incorrect password.';
   }
 
   if (!isInputValid) {
-    message = 'Check login form for the following errors:';
+    message = 'Incorrect username or password. Please check login form for errors.';
   }
 
   return {
@@ -36,8 +38,8 @@ console.log(input);
   };
 }
 
-router.post('/login', (req, res) => {
-console.log(res);
+router.post('/login', (req, res, next) => {
+// console.log(req);
   const checkResult = checkCredentials(req.body);
   if (!checkResult.success) {
     return res.status(400).json({
@@ -46,7 +48,29 @@ console.log(res);
       errors: checkResult.errors
     });
   }
-  return res.status(200).end();
+  // return res.status(200).end();
+  return passport.authenticate('local-login', (err, token, userData) => {
+    if (err) {
+      if (err.name === 'IncorrectCredentialsError') {
+        return res.status(400).json({
+          success: false,
+          message: err.message
+        });
+      }
+
+      return res.status(400).json({
+        success: false,
+        message: 'Could not process the login form.'
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: 'You have successfully logged in.',
+      token,
+      user: userData
+    });
+  })(req, res, next);
 });
 
 module.exports = router;

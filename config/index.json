@@ -1,0 +1,10 @@
+{
+  "jwtSecret": "ps1K0Grfks*1",
+  "users": [
+    {
+      "id": 0,
+      "username": "demo",
+      "password": "password1"
+    }
+  ]
+}
