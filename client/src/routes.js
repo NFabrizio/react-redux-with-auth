@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 import MainLayout from './components/MainLayout.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import DashboardContainer from './containers/DashboardContainer.jsx';
 import NotFound from './components/NotFound.jsx';
 import LoginContainer from './containers/LoginContainer.jsx';
 import Auth from './modules/Auth';
@@ -13,7 +13,7 @@ const routes = (
       path="dashboard"
       getComponent={ (location, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, Dashboard);
+          callback(null, DashboardContainer);
         } else {
           callback(null, LoginContainer);
         }
