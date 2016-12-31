@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Auth from '../modules/Auth';
 import LoginForm from '../components/LoginForm.jsx';
 
-export default class LoginPage extends React.Component {
+export default class LoginContainer extends React.Component {
   /**
    * Class constructor.
    */
@@ -120,6 +120,6 @@ export default class LoginPage extends React.Component {
   }
 }
 
-LoginPage.contextTypes = {
+LoginContainer.contextTypes = {
   router: PropTypes.object.isRequired
 };

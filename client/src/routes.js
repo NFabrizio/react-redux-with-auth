@@ -3,7 +3,7 @@ import { Route, IndexRedirect } from 'react-router';
 import MainLayout from './components/MainLayout.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import NotFound from './components/NotFound.jsx';
-import LoginPage from './containers/LoginPage.jsx';
+import LoginContainer from './containers/LoginContainer.jsx';
 import Auth from './modules/Auth';
 
 const routes = (
@@ -15,13 +15,13 @@ const routes = (
         if (Auth.isUserAuthenticated()) {
           callback(null, Dashboard);
         } else {
-          callback(null, LoginPage);
+          callback(null, LoginContainer);
         }
       } }
     />
     <Route
       path="login"
-      component={ LoginPage }
+      component={ LoginContainer }
     />
     <Route
       path="logout"
