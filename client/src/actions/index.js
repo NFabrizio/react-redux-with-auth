@@ -10,6 +10,7 @@ export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const UPDATE_SERVER_SUCCESS = 'UPDATE_SERVER_SUCCESS';
 export const UPDATE_SERVER_FAILURE = 'UPDATE_SERVER_FAILURE';
+export const SERVER_INFO_RESET = 'SERVER_INFO_RESET';
 
 export const updateUser = (currentUser, newUser) => {
   if (currentUser.username !== newUser.username) {
@@ -61,21 +62,27 @@ export const logoutUserSuccess = () => {
   return {
     type: LOGOUT_USER_SUCCESS,
     loggedIn: false,
-    successMessage: 'You have successfully logged out.'
+    successMessage: 'You have successfully logged out.',
+    user: {
+      username: '',
+      password: ''
+    }
   };
 };
 
-export const logoutUserFailure = (username, error) => {
+export const logoutUserFailure = (user, error) => {
   return {
     type: LOGOUT_USER_FAILURE,
     error,
     loggedIn: true,
-    username
+    user: {
+      username: user.username,
+      password: user.password
+    }
   };
 };
 
 export const updateServerSuccess = (result) => {
-console.log(result);
   return {
     type: UPDATE_SERVER_SUCCESS,
     appPath: result.path,
@@ -90,5 +97,11 @@ export const updateServerFailure = (error) => {
     type: UPDATE_SERVER_FAILURE,
     errors: error,
     requestSuccess: false
+  };
+};
+
+export const resetServerInfo = () => {
+  return {
+    type: SERVER_INFO_RESET
   };
 };

@@ -4,7 +4,8 @@
 // Import dependencies
 import {
   UPDATE_SERVER_SUCCESS,
-  UPDATE_SERVER_FAILURE
+  UPDATE_SERVER_FAILURE,
+  SERVER_INFO_RESET
 } from '../actions';
 
 const serverInfo = (state = {}, action) => {
@@ -21,6 +22,14 @@ const serverInfo = (state = {}, action) => {
         appPath: '',
         dateTime: '',
         errors: error,
+        nodeVersion: '',
+        requestSuccess: false
+      });
+    case SERVER_INFO_RESET:
+      return Object.assign({}, state, {
+        appPath: '',
+        dateTime: '',
+        errors: {},
         nodeVersion: '',
         requestSuccess: false
       });

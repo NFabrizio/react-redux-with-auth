@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
+import Logout from './Logout.jsx';
 
 
 const MainLayout = ({ children }) => (
@@ -11,7 +12,7 @@ const MainLayout = ({ children }) => (
       </div>
       { Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
-          <Link to="/logout">Log out</Link>
+          <Logout />
         </div>
         ) : ''
       }

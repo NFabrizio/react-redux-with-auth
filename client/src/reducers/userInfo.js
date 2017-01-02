@@ -37,7 +37,11 @@ const userInfo = (state = {}, action) => {
       return Object.assign({}, state, {
         errors: {},
         loggedIn: action.loggedIn,
-        successMessage: action.successMessage
+        successMessage: action.successMessage,
+          user: {
+            username: '',
+            password: ''
+          }
       });
     case LOGOUT_USER_FAILURE:
       return Object.assign({}, state, {

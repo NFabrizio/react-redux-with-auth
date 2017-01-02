@@ -24,14 +24,6 @@ const routes = (
       component={ LoginContainer }
     />
     <Route
-      path="logout"
-      onEnter={ (nextState, replace) => {
-        Auth.deauthenticateUser();
-
-        replace('/');
-      }}
-    />
-    <Route
       path="*"
       component={ NotFound }
     />
