@@ -1,5 +1,5 @@
 /**
- * Logout reducers
+ * UserInfo reducers
  */
 // Import dependencies
 import {
