@@ -10,7 +10,7 @@ const LoginForm = ({
   <div className="login row">
     <div className="login-form col-md-6 col-md-offset-3">
       <h4>Login</h4>
-      <p>Welcome to the simple Node React Redux App</p>
+      <p>Welcome to the React Redux with Auth App</p>
       <form className="login-form form-horizontal" id="loginForm" onSubmit={onSubmit}>
         {successMessage && <p className="success-message">{successMessage}</p>}
         {errors.summary && <p className="error-message">{errors.summary}</p>}

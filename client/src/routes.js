@@ -4,6 +4,7 @@ import MainLayout from './components/MainLayout.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';
 import NotFound from './components/NotFound.jsx';
 import LoginContainer from './containers/LoginContainer.jsx';
+import Unauthorized from './components/Unauthorized.jsx';
 import Auth from './modules/Auth';
 
 const routes = (
@@ -15,7 +16,7 @@ const routes = (
         if (Auth.isUserAuthenticated()) {
           callback(null, DashboardContainer);
         } else {
-          callback(null, LoginContainer);
+          callback(null, Unauthorized);
         }
       } }
     />
