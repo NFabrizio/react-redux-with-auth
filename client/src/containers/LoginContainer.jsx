@@ -1,8 +1,14 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Auth from '../modules/Auth';
+import {
+  loginUserSuccess,
+  loginUserFailure,
+  updateUser
+} from '../actions/index.js';
 import LoginForm from '../components/LoginForm.jsx';
 
-export default class LoginContainer extends React.Component {
+class LoginContainer extends React.Component {
   /**
    * Class constructor.
    */
@@ -16,16 +22,6 @@ export default class LoginContainer extends React.Component {
       successMessage = storedMessage;
       localStorage.removeItem('successMessage');
     }
-
-    // set the initial component state
-    this.state = {
-      errors: {},
-      successMessage,
-      user: {
-        username: '',
-        password: ''
-      }
-    };
 
     this.loginSubmit = this.loginSubmit.bind(this);
     this.changeUser = this.changeUser.bind(this);
@@ -41,9 +37,8 @@ export default class LoginContainer extends React.Component {
     event.preventDefault();
     const here = this;
 
-
-    const username = encodeURIComponent(this.state.user.username);
-    const password = encodeURIComponent(this.state.user.password);
+    const username = encodeURIComponent(this.props.userInfo.user.username);
+    const password = encodeURIComponent(this.props.userInfo.user.password);
     const formData = `username=${username}&password=${password}`;
 
     // create an AJAX request
@@ -56,16 +51,12 @@ export default class LoginContainer extends React.Component {
       if (request.status === 200) {
         // success
 
-        // change the component-container state
-        this.setState({
-          errors: {}
-        });
-
         Auth.authenticateUser(request.response.token);
 
-        this.context.router.replace('/');
+        // change the component-container state
+        this.props.success(this.props.userInfo.user);
 
-        // console.log('The form is valid');
+        this.context.router.replace('/');
       } else {
         // failure
 
@@ -74,19 +65,12 @@ export default class LoginContainer extends React.Component {
         errors.summary = request.response.message;
 
         // Error occurred setting up the request
-        console.log(`An error occurred getting the server info: ${errors.summary} \n` +
-          `${errors.username ? '- ' + errors.username : ''} \n` +
-          `${errors.password ? '- ' + errors.password : ''} `);
+        console.log(errors.summary);
 
-        this.setState({
-          errors
-        });
+        this.props.failure(this.props.userInfo.user, errors);
       }
     });
     request.send(formData);
-
-    console.log('username:', this.state.user.username);
-    console.log('password:', this.state.user.password);
   }
 
   /**
@@ -94,14 +78,12 @@ export default class LoginContainer extends React.Component {
    *
    * @param {object} event - the JavaScript event object
    */
-  changeUser(event) {
+  changeUserData(event) {
     const field = event.target.name;
-    const user = this.state.user;
+    const user = Object.assign({}, this.props.userInfo.user);
     user[field] = event.target.value;
 
-    this.setState({
-      user
-    });
+    this.props.updateUser(this.props.userInfo.user, user);
   }
 
   /**
@@ -111,10 +93,10 @@ export default class LoginContainer extends React.Component {
     return (
       <LoginForm
         onSubmit={this.loginSubmit}
-        onChange={this.changeUser}
-        errors={this.state.errors}
-        successMessage={this.state.successMessage}
-        user={this.state.user}
+        onChange={this.changeUserData}
+        errors={this.props.userInfo.errors}
+        successMessage={this.props.userInfo.successMessage}
+        user={this.props.userInfo.user}
       />
     );
   }
@@ -123,3 +105,24 @@ export default class LoginContainer extends React.Component {
 LoginContainer.contextTypes = {
   router: PropTypes.object.isRequired
 };
+
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    success: (user) => {
+      dispatch(loginUserSuccess(user));
+    },
+    failure: (user, errors) => {
+      dispatch(loginUserFailure(user, errors));
+    },
+    updateUser: (currentUser, newUser) => {
+      dispatch(updateUser(currentUser, newUser));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

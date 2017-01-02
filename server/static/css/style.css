@@ -38,11 +38,11 @@ a:hover {
 }
 
 .error-message {
-  padding: 0 16px;
+  padding: 0px;
   color: tomato;
 }
 
 .success-message {
-  padding: 0 16px;
+  padding: 0px;
   color: green;
 }

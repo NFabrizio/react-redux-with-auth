@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRedirect } from 'react-router';
+import { Router, Route, IndexRedirect } from 'react-router';
 import MainLayout from './components/MainLayout.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';
 import NotFound from './components/NotFound.jsx';
