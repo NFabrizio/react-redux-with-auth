@@ -4,7 +4,7 @@
 // Import dependencies
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import Auth from '../modules/Auth';
 import {
   logoutUserSuccess,
@@ -29,12 +29,12 @@ class Logout extends React.Component {
     this.props.logoutSuccess();
     this.props.serverReset();
 
-    this.context.router.replace('/');
+    browserHistory.push('/login');
   }
   render() {
     return (
       <div className="top-bar-right">
-        <a href="#" onClick={this.logoutHandler}>Log out</a>
+        <a onClick={this.logoutHandler}>Log out</a>
       </div>
     );
   }
