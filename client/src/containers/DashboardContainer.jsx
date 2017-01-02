@@ -1,21 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+import {
+  updateServerSuccess,
+  updateServerFailure
+} from '../actions/index.js';
 import Dashboard from '../components/Dashboard.jsx';
 
-export default class DashboardContainer extends React.Component {
+class DashboardContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    // Set the initial component state
-    this.state = {
-      nodeVersion: '',
-      appPath: '',
-      dateTime: '',
-      user: {
-        username: '',
-        password: ''
-      }
-    };
   }
   componentDidMount() {
     const here = this;
@@ -24,13 +18,15 @@ export default class DashboardContainer extends React.Component {
 
     this.serverData = axios.get('/serverInfo', { cancelToken: this.source.token })
                               .then((result) => {
-                                here.setState({
-                                  nodeVersion: result.data.node,
-                                  appPath: result.data.path,
-                                  dateTime: result.data.date
-                                });
+                                // here.setState({
+                                //   nodeVersion: result.data.node,
+                                //   appPath: result.data.path,
+                                //   dateTime: result.data.date
+                                // });
+                                this.props.serverSuccess(result.data);
                               })
                               .catch((error) => {
+                                this.props.serverFailure(error);
                                 if (axios.isCancel(error)) {
                                   console.log('Request canceled', error.message);
                                 } else if (error.response) {
@@ -43,7 +39,7 @@ export default class DashboardContainer extends React.Component {
                                   // Error occurred setting up the request
                                   console.log(`An error occurred getting the server info: ${error.message}`);
                                 }
-                                alert('An error occurred getting the server info');
+                                // alert('An error occurred getting the server info');
                               });
   }
   componentWillUnmount() {
@@ -52,11 +48,30 @@ export default class DashboardContainer extends React.Component {
   render() {
     return (
       <Dashboard
-        nodeVersion={this.state.nodeVersion}
-        appPath={this.state.appPath}
-        dateTime={this.state.dateTime}
-        user={this.state.user}
+        nodeVersion={this.props.serverInfo.nodeVersion}
+        appPath={this.props.serverInfo.appPath}
+        dateTime={this.props.serverInfo.dateTime}
+        user={this.props.userInfo.user}
       />
     )
   }
 };
+
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo,
+    serverInfo: state.serverInfo
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    serverSuccess: (info) => {
+      dispatch(updateServerSuccess(info));
+    },
+    serverFailure: (user, errors) => {
+      dispatch(updateServerFailure(user, errors));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

@@ -24,7 +24,7 @@ class LoginContainer extends React.Component {
     }
 
     this.loginSubmit = this.loginSubmit.bind(this);
-    this.changeUser = this.changeUser.bind(this);
+    this.changeUserData = this.changeUserData.bind(this);
   }
 
   /**

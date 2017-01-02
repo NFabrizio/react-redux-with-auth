@@ -8,18 +8,20 @@ import dashApp from './reducers/index.js';
 
 const initialState = {
   userInfo: {
+    errors: {},
     loggedIn: false,
+    successMessage: '',
     user: {
       username: '',
       password: ''
-    },
-    errors: {},
-    successMessage: ''
+    }
   },
   serverInfo: {
-    nodeVersion: '',
     appPath: '',
-    dateTime: ''
+    dateTime: '',
+    errors: {},
+    nodeVersion: '',
+    requestSuccess: false
   }
 };
 

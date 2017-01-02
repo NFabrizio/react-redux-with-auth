@@ -8,6 +8,8 @@ export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
 export const LOGOUT_USER_FAILURE = 'LOGOUT_USER_FAILURE';
 export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
+export const UPDATE_SERVER_SUCCESS = 'UPDATE_SERVER_SUCCESS';
+export const UPDATE_SERVER_FAILURE = 'UPDATE_SERVER_FAILURE';
 
 export const updateUser = (currentUser, newUser) => {
   if (currentUser.username !== newUser.username) {
@@ -69,5 +71,24 @@ export const logoutUserFailure = (username, error) => {
     error,
     loggedIn: true,
     username
+  };
+};
+
+export const updateServerSuccess = (result) => {
+console.log(result);
+  return {
+    type: UPDATE_SERVER_SUCCESS,
+    appPath: result.path,
+    dateTime: result.date,
+    nodeVersion: result.node,
+    requestSuccess: true
+  };
+};
+
+export const updateServerFailure = (error) => {
+  return {
+    type: UPDATE_SERVER_FAILURE,
+    errors: error,
+    requestSuccess: false
   };
 };

@@ -4,10 +4,11 @@
 // Import dependencies
 import { combineReducers } from 'redux';
 import userInfo from './userInfo';
+import serverInfo from './serverInfo';
 
 const dashApp = combineReducers({
   userInfo,
-  serverInfo: (state = {}) => state.serverInfo ? state.serverInfo : {}
+  serverInfo
 });
 
 export default dashApp;
