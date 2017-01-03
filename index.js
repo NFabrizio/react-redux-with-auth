@@ -49,6 +49,25 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'server', 'static', 'index.html'));
 });
 
+app.post('/', function(req, res){
+  let parsedData = JSON.parse(req.body.jsonData);
+  console.log('\nUser action received:');
+  // console.log(req);
+  console.log(`Action: ${parsedData.actionType}`);
+  console.log('Dispatched data:');
+  console.log(parsedData.dispatching);
+  console.log('New state:');
+  console.log(parsedData.nextState);
+  console.log('\n');
+  // parsedData = JSON.parse(req.body);
+  // console.log(parsedData.actionType);
+  // console.log(parsedData.dispatching);
+  // console.log(parsedData.nextState);
+
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end('Message received');
+});
+
 // start the server
 app.listen(port, hostname, err => {
   if (err) {
