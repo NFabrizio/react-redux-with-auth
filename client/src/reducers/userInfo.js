@@ -2,18 +2,19 @@
  * UserInfo reducers
  */
 // Import dependencies
-import {
-  LOGIN_USER_SUCCESS,
-  LOGIN_USER_FAILURE,
-  LOGOUT_USER_SUCCESS,
-  LOGOUT_USER_FAILURE,
-  UPDATE_USERNAME,
-  UPDATE_PASSWORD,
-} from '../actions';
+import ActionTypes from '../../../constants/actionTypes.js';
+// import {
+//   LOGIN_USER_SUCCESS,
+//   LOGIN_USER_FAILURE,
+//   LOGOUT_USER_SUCCESS,
+//   LOGOUT_USER_FAILURE,
+//   UPDATE_USERNAME,
+//   UPDATE_PASSWORD,
+// } from '../actions';
 
 const userInfo = (state = {}, action) => {
   switch (action.type) {
-    case LOGIN_USER_SUCCESS:
+    case ActionTypes.LOGIN_USER_SUCCESS:
       return Object.assign({}, state, {
         errors: {},
         loggedIn: action.loggedIn,
@@ -23,7 +24,7 @@ const userInfo = (state = {}, action) => {
           password: action.user.password
         }
       });
-    case LOGIN_USER_FAILURE:
+    case ActionTypes.LOGIN_USER_FAILURE:
       return Object.assign({}, state, {
         errors: action.error,
         loggedIn: action.loggedIn,
@@ -33,7 +34,7 @@ const userInfo = (state = {}, action) => {
           password: action.user.password
         }
       });
-    case LOGOUT_USER_SUCCESS:
+    case ActionTypes.LOGOUT_USER_SUCCESS:
       return Object.assign({}, state, {
         errors: {},
         loggedIn: action.loggedIn,
@@ -43,20 +44,20 @@ const userInfo = (state = {}, action) => {
             password: ''
           }
       });
-    case LOGOUT_USER_FAILURE:
+    case ActionTypes.LOGOUT_USER_FAILURE:
       return Object.assign({}, state, {
         errors: action.error,
         loggedIn: action.loggedIn,
         successMessage: ''
       });
-    case UPDATE_USERNAME:
+    case ActionTypes.UPDATE_USERNAME:
       return Object.assign({}, state, {
         user: {
           username: action.user.username,
           password: state.user.password
         }
       });
-    case UPDATE_PASSWORD:
+    case ActionTypes.UPDATE_PASSWORD:
       return Object.assign({}, state, {
         user: {
           username: state.user.username,

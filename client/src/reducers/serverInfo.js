@@ -2,22 +2,23 @@
  * ServerInfo reducers
  */
 // Import dependencies
-import {
-  UPDATE_SERVER_SUCCESS,
-  UPDATE_SERVER_FAILURE,
-  SERVER_INFO_RESET
-} from '../actions';
+import ActionTypes from '../../../constants/actionTypes.js';
+// import {
+//   UPDATE_SERVER_SUCCESS,
+//   UPDATE_SERVER_FAILURE,
+//   SERVER_INFO_RESET
+// } from '../actions';
 
 const serverInfo = (state = {}, action) => {
   switch (action.type) {
-    case UPDATE_SERVER_SUCCESS:
+    case ActionTypes.UPDATE_SERVER_SUCCESS:
       return Object.assign({}, state, {
         appPath: action.appPath,
         dateTime: action.dateTime,
         nodeVersion: action.nodeVersion,
         requestSuccess: true
       });
-    case UPDATE_SERVER_FAILURE:
+    case ActionTypes.UPDATE_SERVER_FAILURE:
       return Object.assign({}, state, {
         appPath: '',
         dateTime: '',
@@ -25,7 +26,7 @@ const serverInfo = (state = {}, action) => {
         nodeVersion: '',
         requestSuccess: false
       });
-    case SERVER_INFO_RESET:
+    case ActionTypes.SERVER_INFO_RESET:
       return Object.assign({}, state, {
         appPath: '',
         dateTime: '',
