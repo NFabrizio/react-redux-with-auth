@@ -22,7 +22,7 @@ const serverInfo = (state = {}, action) => {
       return Object.assign({}, state, {
         appPath: '',
         dateTime: '',
-        errors: error,
+        errors: action.error,
         nodeVersion: '',
         requestSuccess: false
       });
