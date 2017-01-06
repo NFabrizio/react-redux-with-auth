@@ -58,7 +58,7 @@ const userInfo = (state = {}, action) => {
         user: {
           username: action.user.username,
           password: state.user.password,
-          token: state.user.token
+          token: action.user.token
         }
       });
     case ActionTypes.UPDATE_PASSWORD:
@@ -66,7 +66,7 @@ const userInfo = (state = {}, action) => {
         user: {
           username: state.user.username,
           password: action.user.password,
-          token: state.user.token
+          token: action.user.token
         }
       });
     case ActionTypes.SET_TOKEN:

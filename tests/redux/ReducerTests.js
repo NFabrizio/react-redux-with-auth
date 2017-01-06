@@ -12,7 +12,8 @@ const userData = {
   successMessage: '',
   user: {
     username: '',
-    password: ''
+    password: '',
+    token: ''
   }
 };
 const serverData = {
@@ -32,6 +33,7 @@ describe('reducers', () => {
     userData.successMessage = 'You have successfully logged in.';
     userData.user.username = 'demo';
     userData.user.password = 'password1';
+    userData.user.token = 'abc123';
     expect(userInfo({}, Object.assign({}, userData, {
       type: ActionTypes.LOGIN_USER_SUCCESS
     }))).to.eql(userData);
@@ -46,6 +48,7 @@ describe('reducers', () => {
     userData.successMessage = '';
     userData.user.username = 'test';
     userData.user.password = '1234';
+    userData.user.token = '';
     userData.errors = errors;
     expect(userInfo({}, Object.assign({}, userData, {
       type: ActionTypes.LOGIN_USER_FAILURE,
@@ -71,7 +74,8 @@ describe('reducers', () => {
     expect(userInfo({
       user: {
         username: '',
-        password: ''
+        password: '',
+        token:''
       }
     }, Object.assign({}, userData, {
       type: ActionTypes.LOGOUT_USER_FAILURE,
@@ -82,6 +86,7 @@ describe('reducers', () => {
     userData.successMessage = '';
     userData.user.username = 'test';
     userData.user.password = '1234';
+    userData.user.token = '';
     userData.loggedIn = true;
     userData.errors = {};
     expect(userInfo({

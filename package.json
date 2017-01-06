@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --use_strict index.js",
     "bundle": "webpack",
-    "test": "mocha tests/redux --require babel-register",
+    "test": "mocha -w tests/redux --require babel-register",
     "test-react": "mocha -w tests/helpers/browser.js tests/*.spec.js"
   },
   "babel": {

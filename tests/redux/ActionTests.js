@@ -7,11 +7,13 @@ const expect = chai.expect;
 // Set up some test data
 const oldUsername = {
   username: 'testing',
-  password: '1234'
+  password: '1234',
+  token: 'abc123'
 };
 const newUsername = {
   username: 'tester',
-  password: '5678'
+  password: '5678',
+  token: 'abc123'
 };
 const userError = {
   summary: 'Incorrect username or password. Please check login form for errors.',
@@ -69,7 +71,8 @@ describe('actions', () => {
       successMessage: 'You have successfully logged in.',
       user: {
         username: newUsername.username,
-        password: newUsername.password
+        password: newUsername.password,
+        token: newUsername.token
       }
     };
     expect(actions.loginUserSuccess(newUsername)).to.eql(expectedAction);
