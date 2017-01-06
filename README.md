@@ -34,25 +34,25 @@ section by clicking the link below. *These instruction are valid as of 2017.01.0
 
 ### <a name="app-start"></a>Starting the Application
 1. Install the required NPM packages
-  1. In the terminal on your local environment, navigate to the root directory where you cloned the app
-    `cd ~/path/to/your/directory`
-  2. In the terminal on your local environment, run:
-    `npm install`
+  1. In the terminal on your local environment, navigate to the root directory where you cloned the app  
+    `cd ~/path/to/your/directory`  
+  2. In the terminal on your local environment, run:  
+    `npm install`  
     This should install all of the required packages to run the application
 2. Start the application and bundler
-  1. In the terminal on your local environment, navigate to the root directory where you cloned the app
-    `cd ~/path/to/your/directory`
-  2. In the terminal on your local environment, run:
-    `npm start`
+  1. In the terminal on your local environment, navigate to the root directory where you cloned the app  
+    `cd ~/path/to/your/directory`  
+  2. In the terminal on your local environment, run:  
+    `npm start`  
     This should start the application at http://localhost:3000
-  3. In the terminal on your local environment, open a new tab, make sure you are still in the root directory of the app and run:
-    `npm run bundle`
+  3. In the terminal on your local environment, open a new tab, make sure you are still in the root directory of the app and run:  
+    `npm run bundle`  
     This will start the app bundler
 
 ### <a name="app-test"></a>Testing the Application
-1. After you have installed the app and have it running according the instructions above, open a new tab in your terminal and start the test suite by running:
-  `npm test`
+1. After you have installed the app and have it running according the instructions above, open a new tab in your terminal and start the test suite by running:  
+  `npm test`  
   This will start the test suite for the actions and reducers
-2. Open a new tab in your terminal and start the React test suite by running:
-  `mocha -w tests/helpers/browser.js tests/*.spec.js`
+2. Open a new tab in your terminal and start the React test suite by running:  
+  `mocha -w tests/helpers/browser.js tests/*.spec.js`  
   This will start the test suite for the React components
