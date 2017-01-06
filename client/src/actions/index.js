@@ -45,7 +45,8 @@ export const loginUserSuccess = (user) => {
     successMessage: 'You have successfully logged in.',
     user: {
       username: user.username,
-      password: user.password
+      password: user.password,
+      token: user.token
     }
   };
 };
@@ -107,5 +108,18 @@ export const updateServerFailure = (error) => {
 export const resetServerInfo = () => {
   return {
     type: ActionTypes.SERVER_INFO_RESET
+  };
+};
+
+export const setToken = (token) => {
+  return {
+    type: ActionTypes.SET_TOKEN,
+    token
+  };
+};
+
+export const removeToken = () => {
+  return {
+    type: ActionTypes.REMOVE_TOKEN
   };
 };

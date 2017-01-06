@@ -43,8 +43,8 @@ describe('<LoginForm />', () => {
   });
   it('should display a success message', () => {
     wrapper = shallow(<LoginForm
-        onSubmit={loginData.loginSubmit}
-        onChange={loginData.changeUserData}
+        onSubmit={loginData.onSubmit}
+        onChange={loginData.onChange}
         errors={loginData.errors}
         successMessage={successMessage}
         user={loginData.user}
@@ -53,8 +53,8 @@ describe('<LoginForm />', () => {
   });
   it('should display an error message', () => {
     wrapper = shallow(<LoginForm
-        onSubmit={loginData.loginSubmit}
-        onChange={loginData.changeUserData}
+        onSubmit={loginData.onSubmit}
+        onChange={loginData.onChange}
         errors={errors}
         successMessage={loginData.successMessage}
         user={loginData.user}

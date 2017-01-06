@@ -10,12 +10,9 @@ const MainLayout = ({ children }) => (
       <div className="top-bar-left">
         <IndexLink to="/">React Redux With Auth</IndexLink>
       </div>
-      { Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
           <Logout />
         </div>
-        ) : ''
-      }
     </div>
     <div className="content">{children}</div>
   </div>

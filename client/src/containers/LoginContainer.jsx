@@ -15,14 +15,6 @@ class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    const storedMessage = localStorage.getItem('successMessage');
-    let successMessage = '';
-
-    if (storedMessage) {
-      successMessage = storedMessage;
-      localStorage.removeItem('successMessage');
-    }
-
     this.loginSubmit = this.loginSubmit.bind(this);
     this.changeUserData = this.changeUserData.bind(this);
   }
@@ -51,7 +43,10 @@ class LoginContainer extends React.Component {
       if (request.status === 200) {
         // success
 
-        Auth.authenticateUser(request.response.token);
+        //Auth.authenticateUser(request.response.token);
+
+        // Add the token to the user object on success
+        this.props.userInfo.user.token = request.response.token;
 
         // change the component-container state
         this.props.success(this.props.userInfo.user);
@@ -115,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     success: (user) => {
       dispatch(loginUserSuccess(user));
+      //dispatch(setToken(token));
     },
     failure: (user, errors) => {
       dispatch(loginUserFailure(user, errors));

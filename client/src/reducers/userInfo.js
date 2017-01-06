@@ -21,7 +21,8 @@ const userInfo = (state = {}, action) => {
         successMessage: action.successMessage,
         user: {
           username: action.user.username,
-          password: action.user.password
+          password: action.user.password,
+          token: action.user.token
         }
       });
     case ActionTypes.LOGIN_USER_FAILURE:
@@ -31,7 +32,8 @@ const userInfo = (state = {}, action) => {
         successMessage: '',
         user: {
           username: action.user.username,
-          password: action.user.password
+          password: action.user.password,
+          token: ''
         }
       });
     case ActionTypes.LOGOUT_USER_SUCCESS:
@@ -41,7 +43,8 @@ const userInfo = (state = {}, action) => {
         successMessage: action.successMessage,
           user: {
             username: '',
-            password: ''
+            password: '',
+            token: ''
           }
       });
     case ActionTypes.LOGOUT_USER_FAILURE:
@@ -54,14 +57,32 @@ const userInfo = (state = {}, action) => {
       return Object.assign({}, state, {
         user: {
           username: action.user.username,
-          password: state.user.password
+          password: state.user.password,
+          token: state.user.token
         }
       });
     case ActionTypes.UPDATE_PASSWORD:
       return Object.assign({}, state, {
         user: {
           username: state.user.username,
-          password: action.user.password
+          password: action.user.password,
+          token: state.user.token
+        }
+      });
+    case ActionTypes.SET_TOKEN:
+      return Object.assign({}, state, {
+        user: {
+          username: state.user.username,
+          password: state.user.password,
+          token: action.token
+        }
+      });
+    case ActionTypes.REMOVE_TOKEN:
+      return Object.assign({}, state, {
+        user: {
+          username: state.user.username,
+          password: state.user.password,
+          token: ''
         }
       });
     default:

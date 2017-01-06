@@ -23,8 +23,7 @@ class Logout extends React.Component {
   }
 
   logoutHandler() {
-    console.log("clicked!");
-    Auth.deauthenticateUser();
+    //Auth.deauthenticateUser();
 
     this.props.logoutSuccess();
     this.props.serverReset();
@@ -34,7 +33,10 @@ class Logout extends React.Component {
   render() {
     return (
       <div className="top-bar-right">
+        { this.props.userInfo.user.token && this.props.userInfo.user.token !== '' ? (
         <a onClick={this.logoutHandler}>Log out</a>
+        ) : ''
+        }
       </div>
     );
   }

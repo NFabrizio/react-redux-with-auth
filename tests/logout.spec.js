@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import Logout from '../client/src/components/Logout.jsx';
 import { Link } from 'react-router';
 import { storeDummy } from './storeDummy.js';
+import InitialState from '../constants/InitialState.js';
 
 // const logoutData = {
 //   onSubmit: () => { return; },
@@ -20,11 +21,15 @@ import { storeDummy } from './storeDummy.js';
 //     password: ''
 //   }
 // };
-const store = storeDummy({});
+const store = storeDummy(InitialState);
 const wrapper = mount(
   <Provider store={store}>
     <Logout />
-  </Provider>
+  </Provider>,
+  {
+    context: { router: {} },
+    childContextTypes: { router: React.PropTypes.object }
+  }
 );
 
 describe('<Logout />', () => {
