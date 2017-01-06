@@ -3,7 +3,6 @@ import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
 import Logout from './Logout.jsx';
 
-
 const MainLayout = ({ children }) => (
   <div className="container">
     <div className="top-bar">
