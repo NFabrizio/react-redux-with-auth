@@ -6,13 +6,16 @@
   "scripts": {
     "start": "nodemon --use_strict index.js",
     "bundle": "webpack",
-    "test": "mocha tests --require babel-register",
+    "test": "mocha tests/redux --require babel-register",
     "test-react": "mocha -w tests/helpers/browser.js tests/*.spec.js"
   },
   "babel": {
     "presets": [
       "react",
       "es2015"
+    ],
+    "plugins": [
+      "babel-plugin-transform-object-rest-spread"
     ]
   },
   "repository": {

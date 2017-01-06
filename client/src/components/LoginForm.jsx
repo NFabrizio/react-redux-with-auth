@@ -19,7 +19,7 @@ const LoginForm = ({
             <input
               type="text"
               className="form-control"
-              id="dfm-mag-username"
+              id="username"
               placeholder="username"
               name="username"
               autoFocus
@@ -31,7 +31,7 @@ const LoginForm = ({
             <input
               type="password"
               className="form-control"
-              id="dfm-mag-password"
+              id="password"
               placeholder="password"
               name="password"
               required

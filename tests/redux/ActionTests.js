@@ -1,6 +1,6 @@
 import chai from 'chai';
-import * as actions from '../client/src/actions/index.js';
-import ActionTypes from '../constants/actionTypes.js';
+import * as actions from '../../client/src/actions/index.js';
+import ActionTypes from '../../constants/actionTypes.js';
 
 const expect = chai.expect;
 

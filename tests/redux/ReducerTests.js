@@ -1,7 +1,7 @@
 import chai from 'chai';
-import userInfo from '../client/src/reducers/userInfo.js';
-import serverInfo from '../client/src/reducers/serverInfo.js';
-import ActionTypes from '../constants/actionTypes.js';
+import userInfo from '../../client/src/reducers/userInfo.js';
+import serverInfo from '../../client/src/reducers/serverInfo.js';
+import ActionTypes from '../../constants/actionTypes.js';
 
 const expect = chai.expect;
 

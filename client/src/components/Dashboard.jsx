@@ -14,10 +14,10 @@ const Dashboard = ({
   <div className="row">
     <div className="col-md-6 col-md-offset-3">
       <h4>Welcome to the Dashboard</h4>
-      <p>Node.js version: {nodeVersion}</p>
-      <p>Path: {appPath}</p>
-      <p>Date and Time: {dateTime}</p>
-      <p>User: {user.username}</p>
+      <p className="node-version">Node.js version: {nodeVersion}</p>
+      <p className="path">Path: {appPath}</p>
+      <p className="date-time">Date and Time: {dateTime}</p>
+      <p className="user">User: {user.username}</p>
     </div>
   </div>
 );
