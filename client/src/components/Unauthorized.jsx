@@ -1,5 +1,16 @@
 /**
  * Unauthorized access component
+ *
+ * Renders a message stating the the user is not authorized to access the page
+ * with a link back to the login form.
+ *
+ * @parent /client/src/app.jsx
+ *
+ * @see Link
+ *
+ * @export Unauthorized
+ *
+ * @return - HTML elements
  */
 // Import necessary dependencies
 import React from 'react';

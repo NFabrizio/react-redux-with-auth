@@ -1,10 +1,31 @@
 /**
  * Dashboard presentational component
+ *
+ * Renders the login form and error and success messages if they exist. Handles
+ * the onsubmit event for the form and the onchange event for the username and
+ * password fields.
+ *
+ * @parent /client/src/components/LoginContainer.jsx
+ *
+ * @export LoginForm
  */
-// Import necessary dependencies
+
+// Import dependencies
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+/**
+ * Dashboard function
+ *
+ * Returns an HTML dashboard with information about the server.
+ *
+ * @param {String} $nodeVersion - Version of Node running on the server.
+ * @param {String} $appPath - Server path to the application.
+ * @param {String} $dateTime - Date and time the request was made.
+ * @param {String} $user - Username of the currently logged in user.
+ *
+ * @return - HTML elements.
+ */
 const Dashboard = ({
   nodeVersion,
   appPath,
@@ -22,6 +43,15 @@ const Dashboard = ({
   </div>
 );
 
+/**
+ * Defines and validates the props for the component
+ *
+ * Ensures the type for each prop and that the prop exists if it is required.
+ *
+ * @see PropTypes
+ *
+ * @return null
+ */
 Dashboard.PropTypes = {
   nodeVersion: PropTypes.string.isRequired,
   appPath: PropTypes.string.isRequired,
@@ -29,4 +59,5 @@ Dashboard.PropTypes = {
   user: PropTypes.object.isRequired
 };
 
+// Set the default export for the module
 export default Dashboard;

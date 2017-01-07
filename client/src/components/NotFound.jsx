@@ -1,3 +1,18 @@
+/**
+ * Not found component
+ *
+ * Renders a simple HTML 404 not found page with a link back to the main page.
+ *
+ * @parent /client/src/app.jsx
+ *
+ * @see Link
+ *
+ * @export NotFound
+ *
+ * @return - HTML elements.
+ */
+
+// Import dependencies
 import React from 'react';
 import { Link } from 'react-router';
 
