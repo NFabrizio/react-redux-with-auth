@@ -53,7 +53,7 @@ const LoginForm = ({
               name="username"
               autoFocus
               required
-              onBlur={onChange}
+              onChange={onChange}
             />
           </div>
           <div className=" col-md-12 form-group">
@@ -64,7 +64,7 @@ const LoginForm = ({
               placeholder="password"
               name="password"
               required
-              onBlur={onChange}
+              onChange={onChange}
             />
           </div>
           <input
