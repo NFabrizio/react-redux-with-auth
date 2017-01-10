@@ -117,6 +117,7 @@ class LoginContainer extends React.Component {
         const errors = request.response.errors ? request.response.errors : {};
         errors.summary = request.response.message;
         console.log(errors.summary);
+        console.log(errors);
 
         // Dispatch the failure action to update the Redux state
         this.props.failure(this.props.userInfo.user, errors);

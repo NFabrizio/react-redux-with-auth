@@ -20,12 +20,14 @@ module.exports = new PassportLocalStrategy({
   if (!userData) {
     const error = new Error('Incorrect email or password');
     error.name = 'IncorrectCredentialsError';
+    error.message = 'No user data supplied'
     return done(error);
   }
 
   if (userData.password !== user.password) {
     const error = new Error('Incorrect email or password');
     error.name = 'IncorrectCredentialsError';
+    error.message = 'Incorrect email or password';
     return done(error);
   }
 

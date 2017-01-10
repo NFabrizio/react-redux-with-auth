@@ -48,23 +48,28 @@ router.post('/login', (req, res, next) => {
       errors: checkResult.errors
     });
   }
-  // return res.status(200).end();
+
+  // Use Passport authenticate middleware to verify user credentials
   return passport.authenticate('local-login', (err, token, userData) => {
+    // Handle errors
     if (err) {
       if (err.name === 'IncorrectCredentialsError') {
         return res.status(400).json({
           success: false,
-          message: err.message
+          message: err.message,
+          errors: err
         });
       }
 
       return res.status(400).json({
         success: false,
-        message: 'Could not process the login form.'
+        message: 'Could not process the login form.',
+        errors: err
       });
     }
 
-    return res.json({
+    // Return the token and userData submitted
+    return res.status(200).json({
       success: true,
       message: 'You have successfully logged in.',
       token,
