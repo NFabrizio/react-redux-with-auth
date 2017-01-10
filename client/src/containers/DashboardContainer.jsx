@@ -43,6 +43,16 @@ class DashboardContainer extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  /**
+   * Component did mount method
+   *
+   * This method is called in the React component life cycle just after the
+   * component renders. Once the component is rendered, make a call to the /serverInfo
+   * endpoint to get the server information to display to the user. Upon
+   * successful response from the server, dispatch the serverSuccess method to
+   * update the Redux state with the server information.
+   */
   componentDidMount() {
     // Reassign this to here to avoid any issues with using this
     const here = this;
@@ -51,7 +61,7 @@ class DashboardContainer extends React.Component {
     const CancelToken = axios.CancelToken;
     this.source = CancelToken.source();
 
-    //
+    // Make the request to the /serverInfo endpoint and handle success and errors
     this.serverData = axios.get('/serverInfo', { cancelToken: this.source.token })
                               .then((result) => {
                                 this.props.serverSuccess(result.data);
@@ -73,9 +83,21 @@ class DashboardContainer extends React.Component {
                                 // alert('An error occurred getting the server info');
                               });
   }
+
+  /**
+   * Component will unmount method
+   *
+   * This method is called in the React component lifecycle just before the
+   * component is removed from the DOM. Any server requests that are still open
+   * will be canceled before the component is removed.
+   */
   componentWillUnmount() {
     this.source.cancel('Operation canceled by the user action.');
   }
+
+  /**
+   * Render the Dashboard presentational component
+   */
   render() {
     return (
       <Dashboard
@@ -88,12 +110,40 @@ class DashboardContainer extends React.Component {
   }
 };
 
+/**
+ * Maps the Redux state to props
+ *
+ * This function defines and returns the pieces of the Redux state for use inside
+ * this component. It accepts the existing state object and defines a new object
+ * that will be accessible through the component props.
+ *
+ * @param {Object} $state - The current Redux state of the application.
+ * @param {Object} $state.userInfo - Object containing information about the
+ *                                    currently logged in user.
+ *
+ * @return {Object} - Object containing the desired pieces of the Redux state.
+ */
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
     serverInfo: state.serverInfo
   };
 };
+
+/**
+ * Maps the dispatch methods to props
+ *
+ * Creates methods that dispatch Redux actions when called inside the component.
+ * Each of the dispatched functions are imported from the action creators.
+ *
+ * @see dispatch()
+ * @see updateServerSuccess()
+ * @see updateServerFailure()
+ *
+ * @param {Function} $dispatch - The dispatch function made available through Redux.
+ *
+ * @return {Object} - Object containing methods for dispatching Redux actions.
+ */
 const mapDispatchToProps = (dispatch) => {
   return {
     serverSuccess: (info) => {
@@ -105,4 +155,17 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+/**
+ * Export the DashboardContainer component
+ *
+ * Connect the DashboardContainer component to the state and dispatch methods and make them
+ * available inside the component as props and then export the DashboardContainer component.
+ *
+ * @see connect()
+ *
+ * @param {Object} $mapStateToProps - Object containing the desired pieces of
+ *                                     the Redux state.
+ * @param {Object} $mapDispatchToProps - Object containing methods for
+ *                                        dispatching Redux actions.
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
