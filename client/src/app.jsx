@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import { browserHistory, Router, Route, IndexRedirect } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import logger from './middleware/logger.js';
+import logger from './middleware/Logger.js';
 //import Routes from './components/Routes.jsx';
 import dashApp from './reducers/index.js';
 import InitialState from '../../constants/InitialState.js';
