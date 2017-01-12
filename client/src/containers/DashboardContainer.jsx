@@ -78,7 +78,7 @@ class DashboardContainer extends React.Component {
                                   console.log(error.response.headers);
                                 } else {
                                   // Error occurred setting up the request
-                                  console.log(`An error occurred getting the server info: ${error.message}`);
+                                  console.log(error.message);
                                 }
                                 // alert('An error occurred getting the server info');
                               });
