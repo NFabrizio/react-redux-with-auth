@@ -1,3 +1,5 @@
+'use strict';
+
 // Set up constants for action types
 const ActionTypes = {
   LOGIN_USER_SUCCESS: 'LOGIN_USER_SUCCESS',

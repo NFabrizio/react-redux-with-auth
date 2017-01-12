@@ -109,7 +109,7 @@ class LoginContainer extends React.Component {
         this.props.success(this.props.userInfo.user);
 
         // Redirect the user to the main page
-        this.context.router.replace('/');
+        this.context.router.replace('/dashboard');
       } else {
         // Failure
 

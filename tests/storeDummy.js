@@ -1,3 +1,5 @@
+'use strict';
+
 export const storeDummy = (state) => {
 	return {
 		default: () => {},

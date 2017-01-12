@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Initial state object for the application
  */

@@ -1,3 +1,5 @@
+'use strict';
+
 import chai from 'chai';
 import * as actions from '../../client/src/actions/index.js';
 import ActionTypes from '../../constants/actionTypes.js';

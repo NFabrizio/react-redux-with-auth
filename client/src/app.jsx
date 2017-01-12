@@ -14,13 +14,13 @@ import LoginContainer from './containers/LoginContainer.jsx';
 import Unauthorized from './components/Unauthorized.jsx';
 import Auth from './modules/Auth';
 
-export const store = createStore(dashApp, InitialState, compose(applyMiddleware(logger), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+export const store = createStore(dashApp, InitialState, applyMiddleware(logger));
 
 ReactDom.render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={ MainLayout }>
-        <IndexRedirect to="dashboard" />
+        <IndexRedirect to="login" />
         <Route
           path="dashboard"
           getComponent={ (location, callback) => {

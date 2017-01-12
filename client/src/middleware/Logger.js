@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Logs all actions and states after they are dispatched.
  */

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Combine the reducers
  */
