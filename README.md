@@ -54,5 +54,5 @@ section by clicking the link below. *These instruction are valid as of 2017.01.0
   `npm test`  
   This will start the test suite for the actions and reducers
 2. Open a new tab in your terminal and start the React test suite by running:  
-  `mocha -w tests/helpers/browser.js tests/*.spec.js`  
+  `npm run test-react`  
   This will start the test suite for the React components
