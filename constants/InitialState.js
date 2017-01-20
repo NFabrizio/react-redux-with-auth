@@ -2,6 +2,11 @@
 
 /**
  * Initial state object for the application
+ *
+ * This sets up the initial Redux state object for the application so that references
+ * to state elements are not undefined when the application first loads.
+ *
+ * @export InitialState
  */
 const InitialState = {
   userInfo: {
@@ -23,4 +28,5 @@ const InitialState = {
   }
 };
 
+// Set the export for the module
 module.exports = InitialState;

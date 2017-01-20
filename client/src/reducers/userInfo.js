@@ -1,19 +1,50 @@
 'use strict';
 
 /**
- * UserInfo reducers
+ * UserInfo reducer
+ *
+ * Updates the userInfo portion of the Redux state of the application based on
+ * the action dispatched by the application.
+ *
+ * @export userInfo
  */
+
 // Import dependencies
 import ActionTypes from '../../../constants/actionTypes.js';
-// import {
-//   LOGIN_USER_SUCCESS,
-//   LOGIN_USER_FAILURE,
-//   LOGOUT_USER_SUCCESS,
-//   LOGOUT_USER_FAILURE,
-//   UPDATE_USERNAME,
-//   UPDATE_PASSWORD,
-// } from '../actions';
 
+/**
+ * UserInfo reducer
+ *
+ * Accepts the current userInfo Redux state and the return value of the
+ * dispatched action, and makes changes to the Redux state by copying the state
+ * and making necessary changes to it based on on the data returned from the
+ * dispatched action. Makes a copy of the current state rather than mutating it
+ * so that the history of the state is always accessible. Handles the different
+ * types of dispatched actions with a switch case with the default case returning
+ * the current userInfo Redux state of the application.
+ *
+ * @param {Object} $state - The current userInfo Redux state.
+ * @param {Boolean} $state.loggedIn - Current state of whether user is logged in.
+ * @param {String} $state.successMessage - Current log in or log out success message.
+ * @param {Object} $state.user - Current user information.
+ * @param {String} $state.user.username - Current username.
+ * @param {String} $state.user.password - Current password.
+ * @param {String} $state.user.token - Current token.
+ * @param {Object} $state.errors - Error information about the userInfo state.
+ * @param {Object} $action - The returned value of the dispatched action.
+ * @param {String} $action.type - Action type.
+ * @param {Object} $action.error - Error information about the userInfo state.
+ * @param {String} $action.error.message - Message summarizing the error.
+ * @param {String} $action.error.user - Specific error message related to the username.
+ * @param {String} $action.error.password - Specific error message related to the password.
+ * @param {Boolean} $action.loggedIn - State of whether user is logged in.
+ * @param {Object} $action.user - Updated user information.
+ * @param {String} $action.user.username - Updated username.
+ * @param {String} $action.user.password - Update password.
+ * @param {String} $action.user.token - Updated token.
+ *
+ * @return - Updated userInfo Redux state object.
+ */
 const userInfo = (state = {}, action) => {
   switch (action.type) {
     case ActionTypes.LOGIN_USER_SUCCESS:
@@ -92,4 +123,5 @@ const userInfo = (state = {}, action) => {
   }
 };
 
+// Set the export for the module
 export default userInfo;

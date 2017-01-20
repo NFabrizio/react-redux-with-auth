@@ -1,23 +1,32 @@
 'use strict';
 
 /**
- * Actions for Redux
+ * Redux actions
+ *
+ * Sets up the actions to send data from the application to the Redux store. All
+ * of these actions are pure functions and, at the very minimum, return an object
+ * containing a type.
  */
 
-// Set up constants for types
+// Import action types
 import ActionTypes from '../../../constants/actionTypes.js';
 
-// Set up constants for types
-// export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
-// export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
-// export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
-// export const LOGOUT_USER_FAILURE = 'LOGOUT_USER_FAILURE';
-// export const UPDATE_USERNAME = 'UPDATE_USERNAME';
-// export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
-// export const UPDATE_SERVER_SUCCESS = 'UPDATE_SERVER_SUCCESS';
-// export const UPDATE_SERVER_FAILURE = 'UPDATE_SERVER_FAILURE';
-// export const SERVER_INFO_RESET = 'SERVER_INFO_RESET';
-
+/**
+ * Update user action
+ *
+ * Returns changes to username and/or password along with the appropriate action
+ * type. Compares the new user data to the current user data to determine whether
+ * to return changes to the data or no change.
+ *
+ * @param {Object} $currentUser - Current state of the user object.
+ * @param {String} $currentUser.username - Current username.
+ * @param {String} $currentUser.password - Current password.
+ * @param {Object} $newUser - New state of the user object.
+ * @param {String} $newUser.username - Current username.
+ * @param {String} $newUser.password - Current password.
+ *
+ * @return Object containing the action type and changes to user object, if any.
+ */
 export const updateUser = (currentUser, newUser) => {
   if (currentUser.username !== newUser.username) {
     return {
@@ -40,6 +49,19 @@ export const updateUser = (currentUser, newUser) => {
   };
 }
 
+/**
+ * Login user success action
+ *
+ * Returns changes to the userInfo object along with the LOGIN_USER_SUCCESS
+ * action type.
+ *
+ * @param {Object} $user - Updated user object.
+ * @param {String} $user.username - Username of the user.
+ * @param {String} $user.password - Password of the user.
+ * @param {String} $user.token - Authentication token for the user.
+ *
+ * @return Object containing the action type and changes to userInfo object.
+ */
 export const loginUserSuccess = (user) => {
   return {
     type: ActionTypes.LOGIN_USER_SUCCESS,
@@ -53,6 +75,19 @@ export const loginUserSuccess = (user) => {
   };
 };
 
+/**
+ * Login user failure action
+ *
+ * Returns changes to the userInfo object along with the LOGIN_USER_FAILURE
+ * action type.
+ *
+ * @param {Object} $user - Updated user object.
+ * @param {String} $user.username - Username of the user.
+ * @param {String} $user.password - Password of the user.
+ * @param {String} $error - Error object containing reasons for login failure.
+ *
+ * @return Object containing the action type and changes to userInfo object.
+ */
 export const loginUserFailure = (user, error) => {
   return {
     type: ActionTypes.LOGIN_USER_FAILURE,
@@ -65,6 +100,14 @@ export const loginUserFailure = (user, error) => {
   };
 };
 
+/**
+ * Logout user success action
+ *
+ * Returns changes to the userInfo object along with the LOGOUT_USER_SUCCESS
+ * action type.
+ *
+ * @return Object containing the action type and changes to userInfo object.
+ */
 export const logoutUserSuccess = () => {
   return {
     type: ActionTypes.LOGOUT_USER_SUCCESS,
@@ -77,6 +120,19 @@ export const logoutUserSuccess = () => {
   };
 };
 
+/**
+ * Logout user failure action
+ *
+ * Returns changes to the userInfo object along with the LOGOUT_USER_FAILURE
+ * action type.
+ *
+ * @param {Object} $user - Updated user object.
+ * @param {String} $user.username - Username of the user.
+ * @param {String} $user.password - Password of the user.
+ * @param {String} $error - Error object containing reasons for login failure.
+ *
+ * @return Object containing the action type and changes to userInfo object.
+ */
 export const logoutUserFailure = (user, error) => {
   return {
     type: ActionTypes.LOGOUT_USER_FAILURE,
@@ -89,6 +145,19 @@ export const logoutUserFailure = (user, error) => {
   };
 };
 
+/**
+ * Update server success action
+ *
+ * Returns changes to the serverInfo object along with the UPDATE_SERVER_SUCCESS
+ * action type.
+ *
+ * @param {Object} $result - Server result object.
+ * @param {String} $result.path - Server path of the application.
+ * @param {String} $result.date - Date-time stamp of the server request.
+ * @param {String} $result.node - Current version of Node.js on the server.
+ *
+ * @return Object containing the action type and changes to serverInfo object.
+ */
 export const updateServerSuccess = (result) => {
   return {
     type: ActionTypes.UPDATE_SERVER_SUCCESS,
@@ -99,6 +168,16 @@ export const updateServerSuccess = (result) => {
   };
 };
 
+/**
+ * Update server failure action
+ *
+ * Returns changes to the serverInfo object along with the UPDATE_SERVER_FAILURE
+ * action type.
+ *
+ * @param {Object} $error - Error object containing reasons for server update failure.
+ *
+ * @return Object containing the action type and changes to serverInfo object.
+ */
 export const updateServerFailure = (error) => {
   return {
     type: ActionTypes.UPDATE_SERVER_FAILURE,
@@ -107,21 +186,16 @@ export const updateServerFailure = (error) => {
   };
 };
 
+/**
+ * Reset server action
+ *
+ * Returns changes to the serverInfo object along with the SERVER_INFO_RESET
+ * action type.
+ *
+ * @return Object containing the action type.
+ */
 export const resetServerInfo = () => {
   return {
     type: ActionTypes.SERVER_INFO_RESET
-  };
-};
-
-export const setToken = (token) => {
-  return {
-    type: ActionTypes.SET_TOKEN,
-    token
-  };
-};
-
-export const removeToken = () => {
-  return {
-    type: ActionTypes.REMOVE_TOKEN
   };
 };
