@@ -1,9 +1,21 @@
 'use strict';
 
-require('babel-register')();
+/**
+ * jsdom browser set up
+ *
+ * Sets up a browser using jsdom for use in testing React components, though not
+ * a full browser.
+ *
+ * @link https://github.com/tmpvar/jsdom
+ *
+ * @parent /package.json
+ */
 
+// Import dependencies
+require('babel-register')();
 const jsdom = require('jsdom').jsdom;
 
+// Set up an array of properties to expose
 const exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');

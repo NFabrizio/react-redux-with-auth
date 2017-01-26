@@ -1,17 +1,26 @@
+/**
+ * Webpack configuration
+ *
+ * Configures Webpack to the custom settings for this application.
+ *
+ * @export {Object} - Configuration settings object.
+ */
+
+// Import dependencies
 const path = require('path');
 
 module.exports = {
-  // the entry file for the bundle
+  // Entry file for the bundle
   entry: path.join(__dirname, '/client/src/app.jsx'),
 
-  // the bundle file we will get in the result
+  // Bundle file name and location for the resulting bundle
   output: {
     path: path.join(__dirname, '/client/dist/js'),
     filename: 'app.js',
   },
 
   module: {
-    // apply loaders to files that meet given conditions
+    // Apply loaders to files that meet the following conditions
     loaders: [{
       test: /\.jsx?$/,
       include: path.join(__dirname, '/client/src'),
@@ -22,6 +31,6 @@ module.exports = {
     }],
   },
 
-  // start Webpack in a watch mode, so Webpack will rebuild the bundle on changes
+  // Start Webpack in a watch mode, so it will rebuild the bundle on changes
   watch: true
 };
